@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Bencana (GIS)</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2><i class="fa-solid fa-map-location-dot"></i> Info Bencana</h2>
+            <button class="btn-add" onclick="openModal()">
+                <i class="fa-solid fa-plus"></i> Tambah
+            </button>
+        </div>
+
+        <div class="filter-container">
+            <select id="filterCategory" onchange="filterData()">
+                <option value="all">Semua Kategori</option>
+                <option value="Tsunami">Tsunami</option>
+                <option value="Earthquake">Gempa Bumi</option>
+                <option value="Flood">Banjir</option>
+                <option value="Volcanic Eruption">Gunung Meletus</option>
+                <option value="Forest Fire">Kebakaran Hutan</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+
+            <select id="filterStatus" onchange="filterData()" style="margin-top: 10px;">
+                <option value="all">Semua Status</option>
+                <option value="Terkini">Bencana Terkini</option>
+                <option value="Lama">Bencana Lama</option>
+            </select>
+        </div>
+
+        <div id="disaster-list" class="list-container">
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Tambah Data Bencana</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="disasterForm">
+                    <input type="hidden" id="inputId">
+
+                    <div class="form-group">
+                        <label>Status Bencana</label>
+                        <select id="inputStatusBencana" required>
+                            <option value="Terkini">Terkini (Akan tampil sebagai Berita)</option>
+                            <option value="Lama">Lama (Data Historis/Situs)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nama Lokasi / Kejadian</label>
+                        <input type="text" id="inputName" placeholder="Contoh: Banjir Aceh Tamiang" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <select id="inputCategory" required>
+                            <option value="Tsunami">Tsunami</option>
+                            <option value="Earthquake">Gempa Bumi</option>
+                            <option value="Flood">Banjir (Flood)</option>
+                            <option value="Volcanic Eruption">Gunung Meletus (Volcanic Eruption)</option>
+                            <option value="Forest Fire">Kebakaran Hutan</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea id="inputDesc" rows="3" placeholder="Keterangan singkat..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koordinat <small>(Klik **dua kali** peta untuk isi otomatis)</small></label>
+                        <div class="coord-inputs">
+                            <input type="number" id="inputLat" step="any" placeholder="Latitude" required readonly>
+                            <input type="number" id="inputLng" step="any" placeholder="Longitude" required readonly>
+                        </div>
+                        <p class="hint-text">*Klik dua kali (double-click) pada titik di peta untuk mengambil koordinat.
+                        </p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeModal()">Batal</button>
+                        <button type="submit" class="btn-save">Simpan Data</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
