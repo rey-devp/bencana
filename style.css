@@ -73,6 +73,8 @@ body {
     display: none;
     flex-direction: column;
     height: 100%;
+    /* Tambahkan overflow-y: auto agar konten sidebar bisa di-scroll jika panjang */
+    overflow-y: auto;
 }
 
 .sidebar-content.active {
@@ -110,7 +112,6 @@ body {
     font-size: 0.9rem;
     transition: background 0.3s;
     margin: 10px 20px 0 20px;
-    /* Margin disesuaikan agar rapi */
     width: auto;
 }
 
@@ -188,17 +189,14 @@ body {
 }
 
 /* --- MAIN LAYOUT (MAP & DASHBOARD) --- */
-/* Area konten di sebelah sidebar */
 #map-view,
 #dashboard-view {
     position: absolute;
     top: 0;
     left: 380px;
-    /* Sesuai lebar sidebar */
     right: 0;
     bottom: 0;
     display: none;
-    /* Default hidden */
     overflow-y: auto;
     background-color: #f4f6f8;
 }
@@ -208,14 +206,12 @@ body {
     display: block;
 }
 
-/* Map Style */
 #map {
     width: 100%;
     height: 100%;
     z-index: 1;
 }
 
-/* Dashboard Content Wrapper */
 #dashboard-content {
     padding: 30px;
     max-width: 1200px;
@@ -381,7 +377,96 @@ body {
 }
 
 /* =========================================
-   DASHBOARD / BERITA STYLES (NEW)
+   SIDEBAR DASHBOARD STATS STYLES (BARU)
+   ========================================= */
+
+.summary-stats-box {
+    padding: 15px;
+    margin: 20px 20px 0 20px;
+    background: #f4f6f8;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-stats-box h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 2px solid #ef233c;
+    /* Red highlight */
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e0e0e0;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-item-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+}
+
+.summary-item-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* Gaya untuk Kotak Donasi di Sidebar (Disertakan kembali) */
+.sidebar-donation-box {
+    padding: 20px;
+    background: #fff3cd;
+    /* Warna kuning lembut/peringatan */
+    border-radius: 8px;
+    border: 1px solid #ffeeba;
+    margin: 20px;
+    text-align: center;
+}
+
+.sidebar-donation-box h4 {
+    color: #856404;
+    /* Warna teks gelap */
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.sidebar-donation-box p {
+    font-size: 0.9rem;
+    color: #856404;
+    margin-bottom: 15px;
+}
+
+.btn-donate-sidebar {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #ff4757;
+    /* Warna merah menarik */
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-donate-sidebar:hover {
+    background: #e63946;
+}
+
+
+/* =========================================
+   DASHBOARD / BERITA STYLES
    ========================================= */
 
 /* 1. DATA KORBAN */
@@ -537,4 +622,92 @@ body {
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 500;
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS (Max Width 768px)
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* 1. GLOBAL LAYOUT & BODY */
+    body {
+        display: block;
+        height: auto;
+        overflow-y: auto;
+    }
+
+    /* 2. SIDEBAR (Kontrol & List di bagian atas) */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding-bottom: 1px;
+    }
+
+    .sidebar-header {
+        padding: 15px;
+    }
+
+    .btn-add {
+        margin: 10px 15px 0 15px;
+    }
+
+    .filter-container {
+        padding: 10px 15px;
+    }
+
+    .list-container {
+        max-height: 400px;
+    }
+
+    /* 3. MAP/DASHBOARD VIEWS (Konten utama di bawah sidebar) */
+    #map-view,
+    #dashboard-view {
+        position: relative;
+        left: 0;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        min-height: 50vh;
+        width: 100%;
+        overflow-y: auto;
+    }
+
+    /* Map pada #map-view */
+    #map {
+        min-height: 50vh;
+    }
+
+    /* 4. DASHBOARD SPECIFIC ADJUSTMENTS */
+    #dashboard-content {
+        padding: 15px;
+    }
+
+    .youtube-embed {
+        height: 250px;
+    }
+
+    .v-stat h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Donasi Grid: satu kolom */
+    .donation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 5. MODAL */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    /* 6. SIDEBAR DASHBOARD STATS (Mobile) */
+    .summary-stats-box,
+    .sidebar-donation-box {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }
