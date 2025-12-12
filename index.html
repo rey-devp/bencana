@@ -22,34 +22,54 @@
     <div class="sidebar">
         <div class="sidebar-header">
             <h2><i class="fa-solid fa-map-location-dot"></i> Info Bencana</h2>
+
+            <div class="nav-buttons">
+                <button class="btn-nav active" onclick="switchView('map-view')">
+                    <i class="fa-solid fa-map"></i> Peta
+                </button>
+                <button class="btn-nav" onclick="switchView('dashboard-view')">
+                    <i class="fa-solid fa-newspaper"></i> Berita
+                </button>
+            </div>
+        </div>
+
+        <div id="map-sidebar-content" class="sidebar-content active">
             <button class="btn-add" onclick="openModal()">
                 <i class="fa-solid fa-plus"></i> Tambah
             </button>
-        </div>
 
-        <div class="filter-container">
-            <select id="filterCategory" onchange="filterData()">
-                <option value="all">Semua Kategori</option>
-                <option value="Tsunami">Tsunami</option>
-                <option value="Earthquake">Gempa Bumi</option>
-                <option value="Flood">Banjir</option>
-                <option value="Volcanic Eruption">Gunung Meletus</option>
-                <option value="Forest Fire">Kebakaran Hutan</option>
-                <option value="Lainnya">Lainnya</option>
-            </select>
+            <div class="filter-container">
+                <select id="filterCategory" onchange="filterData()">
+                    <option value="all">Semua Kategori</option>
+                    <option value="Tsunami">Tsunami</option>
+                    <option value="Earthquake">Gempa Bumi</option>
+                    <option value="Flood">Banjir</option>
+                    <option value="Volcanic Eruption">Gunung Meletus</option>
+                    <option value="Forest Fire">Kebakaran Hutan</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
 
-            <select id="filterStatus" onchange="filterData()" style="margin-top: 10px;">
-                <option value="all">Semua Status</option>
-                <option value="Terkini">Bencana Terkini</option>
-                <option value="Lama">Bencana Lama</option>
-            </select>
-        </div>
+                <select id="filterStatus" onchange="filterData()" style="margin-top: 10px;">
+                    <option value="all">Semua Status</option>
+                    <option value="Terkini">Bencana Terkini</option>
+                    <option value="Lama">Bencana Lama</option>
+                </select>
+            </div>
 
-        <div id="disaster-list" class="list-container">
+            <div id="disaster-list" class="list-container">
+            </div>
         </div>
     </div>
 
-    <div id="map"></div>
+    <div id="map-view" class="active">
+        <div id="map"></div>
+    </div>
+
+    <div id="dashboard-view">
+        <div id="dashboard-content">
+        </div>
+    </div>
+
 
     <div id="formModal" class="modal">
         <div class="modal-content">
